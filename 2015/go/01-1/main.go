@@ -2,20 +2,15 @@ package main
 
 import (
 	"bufio"
-	"io"
 	"log"
-	"os"
+
+	"github.com/pborzenkov/aoc/pkg/go/input"
 )
 
 func main() {
-	var r io.Reader = os.Stdin
-	var err error
-	if len(os.Args) >= 2 {
-		r, err = os.Open(os.Args[1])
-		if err != nil {
-			log.Fatalf("Cannot open input file: %v", err)
-		}
-	}
+	r := input.NewFileOrStdin()
+	defer r.Close()
+
 	s := bufio.NewScanner(r)
 	s.Split(bufio.ScanRunes)
 
