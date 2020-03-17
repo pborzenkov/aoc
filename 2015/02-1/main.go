@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/pborzenkov/aoc/pkg/go/input"
+	"github.com/pborzenkov/aoc/pkg/input"
 )
 
 func min(val int, vals ...int) int {

@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"log"
 
-	"github.com/pborzenkov/aoc/pkg/go/input"
+	"github.com/pborzenkov/aoc/pkg/input"
 )
 
 func main() {
@@ -15,7 +15,9 @@ func main() {
 	s.Split(bufio.ScanRunes)
 
 	floor := 0
+	position := 0
 	for s.Scan() {
+		position += 1
 		switch s.Text() {
 		case "(":
 			floor += 1
@@ -24,9 +26,12 @@ func main() {
 		default:
 			log.Fatalf("Unsupported token in the input: %v", s.Text())
 		}
+		if floor == -1 {
+			break
+		}
 	}
 	if s.Err() != nil {
 		log.Fatalf("Scanning completed with error (%v), result might be unreliable", s.Err())
 	}
-	log.Printf("Floor: %v", floor)
+	log.Printf("Token position: %v", position)
 }

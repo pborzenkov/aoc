@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"log"
 
-	"github.com/pborzenkov/aoc/pkg/go/input"
+	"github.com/pborzenkov/aoc/pkg/input"
 )
 
 func main() {

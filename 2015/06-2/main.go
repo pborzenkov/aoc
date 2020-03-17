@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/pborzenkov/aoc/pkg/go/input"
+	"github.com/pborzenkov/aoc/pkg/input"
 )
 
 const (
