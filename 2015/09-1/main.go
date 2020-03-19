@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/pborzenkov/aoc/pkg/input"
+	"github.com/pborzenkov/aoc/pkg/iterutils"
 )
 
 var (
@@ -25,27 +26,6 @@ func setDistance(from string, to string, d int) {
 	}
 	distances[from][to] = d
 	distances[to][from] = d
-}
-
-func forAllPerms(cities []string, cb func([]string)) {
-	s := make([]string, len(cities))
-	copy(s, cities)
-
-	var p func(int)
-	p = func(i int) {
-		if i > len(s) {
-			cb(s)
-			return
-		}
-
-		p(i + 1)
-		for j := i + 1; j < len(s); j++ {
-			s[i], s[j] = s[j], s[i]
-			p(i + 1)
-			s[i], s[j] = s[j], s[i]
-		}
-	}
-	p(0)
 }
 
 func main() {
@@ -71,7 +51,7 @@ func main() {
 	}
 
 	min := math.MaxInt32
-	forAllPerms(cities, func(cities []string) {
+	iterutils.ForAllPerms(cities, func(cities []string) {
 		var d int
 		for i := 1; i < len(cities); i++ {
 			d += distances[cities[i-1]][cities[i]]
