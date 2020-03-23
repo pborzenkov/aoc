@@ -93,6 +93,28 @@ func TestSet(t *testing.T) {
 	}
 }
 
+func TestIsSet(t *testing.T) {
+	bmap, err := bitmap.FromString("010000000000000000000000000000000000000000000000000000010000000000")
+	require.NoError(t, err)
+
+	var tests = []struct {
+		bit uint
+		set bool
+	}{
+		{0, false},
+		{10, true},
+		{20, false},
+		{64, true},
+		{65, false},
+	}
+
+	for i, test := range tests {
+		t.Run(fmt.Sprintf("test_%d", i+1), func(t *testing.T) {
+			assert.Equal(t, test.set, bmap.IsSet(test.bit))
+		})
+	}
+}
+
 func TestClear(t *testing.T) {
 	var size uint = 65
 

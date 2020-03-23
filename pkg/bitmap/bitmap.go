@@ -154,6 +154,15 @@ func (b *Bitmap) Not(start, nbits uint) error {
 	return nil
 }
 
+// IsSet returns true if the given bit is set.
+func (b *Bitmap) IsSet(bit uint) bool {
+	if bit >= b.size {
+		return false
+	}
+	i := bit / wordSize
+	return (b.data[i] & (uint(1) << (bit % wordSize))) != 0
+}
+
 // Weight returns a Hamming weight of the bitmap (number of set bits).
 func (b *Bitmap) Weight() int {
 	var weight int
